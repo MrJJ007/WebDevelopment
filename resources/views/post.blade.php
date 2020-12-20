@@ -14,7 +14,7 @@
                     @endif
                     <div class="card-header">{{$post_user = $post->user}}
                         @if ($post_user == Auth::user()->name)
-                        <i><a href='{!!url('/post/edit',['id'=>$post->id]);!!}'style='color:#000000'> edit post</a></i>
+                        <i><a href='{{url('/post/edit',['id'=>$post->id])}}'style='color:#000000'> edit post</a></i>
                         @endif
                     </div>
                     <div class="card-body">{{$post->content}}</div>
@@ -31,7 +31,7 @@
                             @if ($comment->post_id==$post->id)
                                     <p class="tab">{{$comment_user = $comment->user}}: {{$comment->content}}&emsp;&emsp;&emsp;
                                     @if ($comment_user == Auth::user()->name)
-                                    <i><a href='{!!url('/comment/edit',['id'=>$comment->id]);!!}'style='color:#000000'> edit comment</a></i>
+                                    <i><a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'> edit comment</a></i>
                                     @endif</p>
                             @endif
                         @endforeach
