@@ -41,4 +41,4 @@ Route::post('commentedit',[App\Http\Controllers\CommentController::class, 'editS
 
 Route::get('comment/delete/{comment}',[App\Http\Controllers\CommentController::class, 'deleteStore'])->name('comment.delete');
 
-Route::get('email',[App\Http\Controllers\MailController::class, 'sendNewCommentEmail']);
+Route::get('email',[App\Http\Controllers\MailController::class, 'sendNewCommentEmail'])->name('email');

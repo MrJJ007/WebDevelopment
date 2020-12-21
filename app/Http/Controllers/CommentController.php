@@ -19,14 +19,13 @@ class CommentController extends Controller
     {
         $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function store(Request $request){
-        $post_id = substr(url()->previous(),-1);
+        $post_id = substr(url()->previous(),27);
         $validatedData = $request->validate([
             'comment'=> 'required|max:200',
             ]);
@@ -36,13 +35,12 @@ class CommentController extends Controller
         $a->content = $validatedData['comment'];
         $a->post_id = $post_id;
         $a->save();
-        //dd($validatedData);
 
         session()->flash('message','Comment made');
-        return redirect()->route('home');
+        return redirect()->route('email');
     }
     public function deleteStore(){
-        $comment_id = substr(url()->previous(),-2);
+        $comment_id = substr(url()->previous(),35);
         $comment = Comment::findOrFail($comment_id);
         $comment->delete();
         session()->flash('message','Comment deleted');
@@ -55,24 +53,17 @@ class CommentController extends Controller
     public function editStore(Request $request,Comment $comment){
         $comment_id = substr(url()->previous(),-2);
         $comment = Comment::findOrFail($comment_id);
-        $post_id = $comment->post_id;//substr(url()->previous(),-1);
-
+        $post_id = $comment->post_id;
         $comment->delete();
-
         $validatedData = $request->validate([
             'content'=> 'required|max:200',
             ]);
-
         $a=new Comment;
         $a->post_id = $post_id;
         $a->user_id = Auth::user()->id;// need to access user id
         $a->user = Auth::user()->name;// need to access user name
-
         $a->content=$validatedData['content'];
         $a->save();
-
-
-
         session()->flash('message','Comment edited');
         return redirect()->route('home');
     }

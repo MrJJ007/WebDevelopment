@@ -1,12 +1,5 @@
 @extends('layouts.app')
-<head>
-    <script>
 
-    </script>
-    <style>
-
-    </style>
-</head>
 @section('content')
 <body>
 <div class="container">
@@ -53,7 +46,6 @@
                     </div>
                 </div>
             @endforeach
-
         </div>
     </div>
 </div>

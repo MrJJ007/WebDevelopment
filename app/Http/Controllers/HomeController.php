@@ -51,7 +51,7 @@ class HomeController extends Controller
         return redirect()->route('home');
     }
     public function deleteStore(){
-        $post_id = substr(url()->previous(),-1);
+        $post_id = substr(url()->previous(),32);
         $post = Post::findOrFail($post_id);
         $post->delete();
         session()->flash('message','Post deleted');
@@ -62,7 +62,7 @@ class HomeController extends Controller
         return view('editPost',['post'=>$post,'comments'=>$comments]);
     }
     public function editStore(Request $request){
-        $post_id = substr(url()->previous(),-1);
+        $post_id = substr(url()->previous(),32);
         $post = Post::findOrFail($post_id);
         $comments = Comment::all();
 

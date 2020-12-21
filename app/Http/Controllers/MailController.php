@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
-class CommentController extends Controller
+class MailController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,13 +21,21 @@ class CommentController extends Controller
     }
 
     public function sendNewCommentEmail(){
+
         $data = array('name'=>"gandi");
-        Mail::send(['text'=>'mail'], $data, function($message) {
-            $message->to('abc@gmail.com', 'Tutorials Point')->subject
+        Mail::send(['text'=>'commentMail'], $data, function($message) {
+            $post_id = substr(url()->previous(),27);
+            $post = Post::findOrFail($post_id);
+            $post_user_id = $post->user_id;
+            $post_user = User::findOrFail($post_user_id);
+            $email = $post_user->email;
+            $message->to($email, 'Tutorials Point')->subject
                ('Laravel Basic Testing Mail');
-            $message->from('xyz@gmail.com','Virat Gandhi');
+            $message->from('SwackbookRuddyPosting@gmail.com','Moss');
 
          });
+         echo "email sent";
+         return redirect()->route('home');
     }
 }
 
