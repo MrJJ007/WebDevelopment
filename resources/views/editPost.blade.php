@@ -12,7 +12,9 @@
                         </div>
                         </div>
                     @endif
-                    <div class="card-header">Edit your post: {{$post->user}}</div>
+                    <div class="card-header">Edit your post: {{$post->user}}&emsp;&emsp;&emsp;
+                        <i> <a href="{{url('/post/delete',['id'=>$post->id])}}"style='color:#000000'>delete post</a></i>
+                    </div>
                     <div class="card-body">
                         <form method="POST" action="{{route('post.edit.store')}}">
                             @csrf

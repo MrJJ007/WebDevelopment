@@ -12,7 +12,9 @@
                         </div>
                         </div>
                     @endif
-                    <div class="card-header">Edit your Comment: {{$post->user}}</div>
+                    <div class="card-header">Edit your Comment: {{$post->user}}&emsp;&emsp;&emsp;
+                        <i> <a href="{{url('/comment/delete',['id'=>$comment->id])}}"style='color:#000000'>delete comment</a></i>
+                    </div>
                     <div class="card-body">
                         <form method="POST" action="{{route('comment.edit.store')}}">
                             @csrf

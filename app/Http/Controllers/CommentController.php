@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -35,8 +36,16 @@ class CommentController extends Controller
         $a->content = $validatedData['comment'];
         $a->post_id = $post_id;
         $a->save();
+        //dd($validatedData);
+
         session()->flash('message','Comment made');
-        //$url = '127.0.0.1/post/'.$post_id;
+        return redirect()->route('home');
+    }
+    public function deleteStore(){
+        $comment_id = substr(url()->previous(),-2);
+        $comment = Comment::findOrFail($comment_id);
+        $comment->delete();
+        session()->flash('message','Comment deleted');
         return redirect()->route('home');
     }
     public function edit(Post $post, Comment $comment){
@@ -47,9 +56,6 @@ class CommentController extends Controller
         $comment_id = substr(url()->previous(),-2);
         $comment = Comment::findOrFail($comment_id);
         $post_id = $comment->post_id;//substr(url()->previous(),-1);
-
-        $post = 1;//Post::findOrFail($post_id);
-        $comments = Comment::all();
 
         $comment->delete();
 
@@ -64,6 +70,8 @@ class CommentController extends Controller
 
         $a->content=$validatedData['content'];
         $a->save();
+
+
 
         session()->flash('message','Comment edited');
         return redirect()->route('home');

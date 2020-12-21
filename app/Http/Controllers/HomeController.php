@@ -50,6 +50,13 @@ class HomeController extends Controller
         session()->flash('message','Post made');
         return redirect()->route('home');
     }
+    public function deleteStore(){
+        $post_id = substr(url()->previous(),-1);
+        $post = Post::findOrFail($post_id);
+        $post->delete();
+        session()->flash('message','Post deleted');
+        return redirect()->route('home');
+    }
     public function edit(Post $post){
         $comments = Comment::all();
         return view('editPost',['post'=>$post,'comments'=>$comments]);
