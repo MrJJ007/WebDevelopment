@@ -35,14 +35,7 @@
                     @endauth
                 </div>
             @endif
-            @php
-                use App\Models\User;
-                $user = User::findOrFail(1);
-                $email = $user->email;
-                $pass = $user->password;
-                $name = $user->name;
-            @endphp
-                 {{$email}} {{$pass}} {{$name}}
+
                 <!-- <img src="{{asset('public/images/image.jpg')}}" alt="image"title="moss"> -->
 
         </div>

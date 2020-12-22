@@ -34,10 +34,28 @@ class CommentController extends Controller
         $a->user = Auth::user()->name;
         $a->content = $validatedData['comment'];
         $a->post_id = $post_id;
+
+        $a->save();
+        session()->flash('message','Comment made');
+        return redirect()->route('email');
+    }
+    public function multi_store(Request $request){
+
+        $multi_post_id = substr(url()->previous(),33);//33
+        $validatedData = $request->validate([
+            'comment'=> 'required|max:200',
+            ]);
+        $a = new Comment;
+        $a->user_id = Auth::user()->id;
+        $a->user = Auth::user()->name;
+        $a->content = $validatedData['comment'];
+        $a->multi_post_id=$multi_post_id;
+
+        //dd($a);
         $a->save();
 
         session()->flash('message','Comment made');
-        return redirect()->route('email');
+        return redirect()->route('home');
     }
     public function deleteStore(){
         $comment_id = substr(url()->previous(),35);

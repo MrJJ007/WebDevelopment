@@ -29,15 +29,33 @@
                     @if ($user->is_admin==1)
                         You are an admin!
                     @else
-                        You aren't an admin. So please keep memes out of general.
+                        You're not an admin. So please keep memes out of general.
                     @endif
                 </div>
             </div>
 
+            @foreach ($multi_posts as $multi_post)
+                <p></p>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{{$multi_post->users}} - Multi Post! {{$multi_post->id}}</h4><i><a href='{{url('#')}}'style='color:#000000'> edit post</a></i>
+                    </div>
+                    <div class="card-body"><a href='{{url('/multi_post',['id'=>$multi_post->id])}}'>{{$multi_post->content}} </a></div>
+                    <div class="list-group-item">
+                        @foreach ($comments as $comment)
+                            @if ($comment->multi_post_id==$multi_post->id)
+                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}} {{$comment->id}}</p>
+                            @endif
+                        @endforeach
+
+                    </div>
+                </div>
+            @endforeach
+
             @foreach ($posts as $post)
                 <p></p>
                 <div class="card" >
-                    <div class="card-header"><h4>{{$post_user = $post->user}}</h4>
+                    <div class="card-header"><h4>{{$post_user = $post->user}} {{$post->id}}</h4>
                         @if ($post_user == $user_name || $user->is_admin)
                         <i><a href='{{url('/post/edit',['id'=>$post->id])}}'style='color:#000000'> edit post</a></i>
                         @endif
@@ -46,7 +64,7 @@
                     <div class="list-group-item">
                     @foreach ($comments as $comment)
                         @if ($comment->post_id==$post->id)
-                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}}
+                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}} {{$comment->id}}
                                 @if ($comment_user == $user_name || $user->is_admin)
                                     <i>&emsp;&emsp;&emsp;<a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'> edit comment</a></i>
                                 @endif</p>

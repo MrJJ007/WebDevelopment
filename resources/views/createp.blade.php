@@ -11,6 +11,8 @@
                             @csrf
                             <p>Content: <input type="text" name="content" size="75"
                                 value="{{old('content')}}"autofocus></p>
+                                <input type="checkbox" name="multiPost" id="multiPost" value="multiPost">
+                                <label for="multiPost">Allow others to edit this post, and only allow one comment</label><br />
                             <input type="submit" value="Post">
                             <a href="{{url('/home')}}">Back</a>
                         </form>
