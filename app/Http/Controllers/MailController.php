@@ -29,8 +29,9 @@ class MailController extends Controller
             $post_user_id = $post->user_id;
             $post_user = User::findOrFail($post_user_id);
             $email = $post_user->email;
-            $message->to($email, 'Tutorials Point')->subject
-               ('Laravel Basic Testing Mail');
+            $name = $post_user->name;
+            $message->to($email, $name)->subject
+               ('New Comment on your Post');
             $message->from('SwackbookRuddyPosting@gmail.com','Moss');
 
          });
