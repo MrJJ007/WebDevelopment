@@ -79,6 +79,14 @@ class HomeController extends Controller
         session()->flash('message','Post deleted');
         return redirect()->route('home');
     }
+    public function multi_delete_store(){
+        $multi_post_id = substr(url()->previous(),38);
+        //dd($multi_post_id);
+        $multi_post = MultiPost::findOrFail($multi_post_id);
+        $multi_post->delete();
+        session()->flash('message','Multi Post deleted');
+        return redirect()->route('home');
+    }
 
     public function edit(Post $post){
         $comments = Comment::all();
@@ -87,29 +95,28 @@ class HomeController extends Controller
     public function editStore(Request $request){
         $post_id = substr(url()->previous(),32);
         $post = Post::findOrFail($post_id);
-        $comments = Comment::all();
-
-        $post->delete();
         $validatedData = $request->validate([
             'content'=> 'required|max:200',
             ]);
-        $a=new Post;
-        $a->id = $post_id;
-        $a->user_id = Auth::user()->id;// need to access user id
-        $a->user = Auth::user()->name;// need to access user name
-        $a->content=$validatedData['content'];
-        $a->save();
-        foreach($comments as $comment){
-            if($comment->post_id==$post->id){
-                $a = new Comment;
-                $a->id= $comment->id;
-                $a->user_id = $comment->user_id;
-                $a->user = $comment->user;
-                $a->content = $comment->content;
-                $a->post_id = $post_id;
-                $a->save();
-            }
-        };
+        $post->content=$validatedData['content'];
+        $post->save();
+        session()->flash('message','Post edited');
+        return redirect()->route('home');
+    }
+    public function multi_edit(){
+        $comments = Comment::all();
+        $multi_post_id = substr(url()->previous(),33);
+        $multi_post = MultiPost::findOrFail($multi_post_id);
+        return view('editMultiPost',['multi_post'=>$multi_post,'comments'=>$comments]);
+    }
+    public function multi_edit_store(Request $request){
+        $multi_post_id = substr(url()->previous(),38);
+        $multi_post = MultiPost::findOrFail($multi_post_id);
+        $validatedData = $request->validate([
+            'content'=> 'required|max:200',
+            ]);
+        $multi_post->content=$validatedData['content'];
+        $multi_post->save();
         session()->flash('message','Post edited');
         return redirect()->route('home');
     }

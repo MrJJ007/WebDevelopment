@@ -38,13 +38,16 @@
                 <p></p>
                 <div class="card">
                     <div class="card-header">
-                        <h4>{{$multi_post->users}} - Multi Post! {{$multi_post->id}}</h4><i><a href='{{url('#')}}'style='color:#000000'> edit post</a></i>
+                        <h4>{{$multi_post->users}} - Multi Post! {{$multi_post->id}}</h4>
                     </div>
                     <div class="card-body"><a href='{{url('/multi_post',['id'=>$multi_post->id])}}'>{{$multi_post->content}} </a></div>
                     <div class="list-group-item">
                         @foreach ($comments as $comment)
                             @if ($comment->multi_post_id==$multi_post->id)
-                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}} {{$comment->id}}</p>
+                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}}
+                                @if ($comment_user == $user_name || $user->is_admin)
+                                    <i>&emsp;&emsp;&emsp;<a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'> edit comment</a></i>
+                                @endif</p>
                             @endif
                         @endforeach
 

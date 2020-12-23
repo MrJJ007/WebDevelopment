@@ -27,8 +27,11 @@ Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name(
 
 Route::get('post/{post}',[App\Http\Controllers\HomeController::class, 'show'])->name('post.show');
 
-Route::get('multi_post/{multi_post}',[App\Http\Controllers\HomeController::class, 'multi_post_show'])->name('multiPost.show');
+Route::get('multi_post/{multi_post}',[App\Http\Controllers\HomeController::class, 'multi_post_show'])->name('multi_post.show');
 //Route::post('multiPost',[App\Http\Controllers\HomeController::class, 'multiPostStore'])->name('multiPost.store');
+Route::get('multi_post/edit/{post}',[App\Http\Controllers\HomeController::class, 'multi_edit'])->name('mulit_post.edit');
+Route::post('multi_postedit',[App\Http\Controllers\HomeController::class, 'multi_edit_store'])->name('multi_post.edit.store');
+Route::get('multi_post/delete/{multi_post}',[App\Http\Controllers\HomeController::class, 'multi_delete_store'])->name('multi_post.edit');
 
 Route::get('post/edit/{post}',[App\Http\Controllers\HomeController::class, 'edit'])->name('post.edit');
 Route::post('postedit',[App\Http\Controllers\HomeController::class, 'editStore'])->name('post.edit.store');

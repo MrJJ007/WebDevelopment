@@ -26,7 +26,7 @@ class CommentFactory extends Factory
                 'content' => $this->faker->realText($maxNbChars = 50, $indexSize = 2),
                 'user_id'=>$this ->faker->NumberBetween(1,20),
                 'post_id' => $this ->faker->NumberBetween(1,20),
-                'multi_post_id' => $this ->faker->NumberBetween(1,20)
+                'multi_post_id' => 0
             ];
     }
 }

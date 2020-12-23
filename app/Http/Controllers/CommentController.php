@@ -34,7 +34,6 @@ class CommentController extends Controller
         $a->user = Auth::user()->name;
         $a->content = $validatedData['comment'];
         $a->post_id = $post_id;
-
         $a->save();
         session()->flash('message','Comment made');
         return redirect()->route('email');
@@ -50,10 +49,7 @@ class CommentController extends Controller
         $a->user = Auth::user()->name;
         $a->content = $validatedData['comment'];
         $a->multi_post_id=$multi_post_id;
-
-        //dd($a);
         $a->save();
-
         session()->flash('message','Comment made');
         return redirect()->route('home');
     }
@@ -71,17 +67,11 @@ class CommentController extends Controller
     public function editStore(Request $request,Comment $comment){
         $comment_id = substr(url()->previous(),-2);
         $comment = Comment::findOrFail($comment_id);
-        $post_id = $comment->post_id;
-        $comment->delete();
         $validatedData = $request->validate([
             'content'=> 'required|max:200',
             ]);
-        $a=new Comment;
-        $a->post_id = $post_id;
-        $a->user_id = Auth::user()->id;// need to access user id
-        $a->user = Auth::user()->name;// need to access user name
-        $a->content=$validatedData['content'];
-        $a->save();
+        $comment->content=$validatedData['content'];
+        $comment->save();
         session()->flash('message','Comment edited');
         return redirect()->route('home');
     }
