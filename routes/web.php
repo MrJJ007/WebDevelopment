@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\News;
-use App\Models\ApiCall;
+use App\Models\Fact;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application\Singleton;
 

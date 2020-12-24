@@ -1,10 +1,11 @@
 <?php
-
+namespace App\Models;
 class Fact
 {
-    protected $parameter;
+    public $parameter;
     public function __construct($parameter)
     {
         $this->parameter = $parameter;
     }
 }
+?>
