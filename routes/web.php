@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\News;
+use App\Models\ApiCall;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application\Singleton;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+app()->singleton('App\Models\Fact',function($app){
+    return new Fact('maxlength=140');
+});
+Route::get('example', [App\Http\Controllers\FactController::class, 'exampleMethod']);
 
 Route::get('/', function () {
     return view('welcome');

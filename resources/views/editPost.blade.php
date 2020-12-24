@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{route('post.edit.store')}}">
-                            @csrf<p>Content: <input type="text" name="content" size="75"
+                            @csrf<p>Content: <input type="text" name="content" size="35"
                                 value="{{$post->content}}"autofocus></p>
                             <input type="submit" value="Post edition">
                             <a href="{{url('/home')}}">Back</a>

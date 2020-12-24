@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{route('post.store')}}">
                             @csrf
-                            <p>Content: <input type="text" name="content" size="75"
+                            <p>Content: <input type="text" name="content" size="35"
                                 value="{{old('content')}}"autofocus></p>
                                 <input type="checkbox" name="multiPost" id="multiPost" value="multiPost">
                                 <label for="multiPost">Allow others to edit this post, and only allow one comment</label><br />

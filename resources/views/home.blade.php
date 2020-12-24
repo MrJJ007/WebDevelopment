@@ -18,7 +18,7 @@
             @endif
             <p></p>
             <div class="card">
-                <div class="card-header"><a href='{{url('/createp')}}'>Create Post</div></a>
+                <div class="card-header"><a href='{{url('/createp')}}'>Create Post</a></div>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -31,6 +31,9 @@
                     @else
                         You're not an admin. So please keep memes out of general.
                     @endif
+                </div>
+                <div class="card-footer">
+                    <a href='{{url('/example')}}'>Cat Fact!</a>
                 </div>
             </div>
 
