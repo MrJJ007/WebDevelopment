@@ -23,13 +23,15 @@
                     @endif
                     <div class="card-header">
                         <h4>{{$multi_post->users}} - Multi Post!</h4>
-                    <i><a href='{{url('/multi_post/edit',['id'=>$multi_post->id])}}'style='color:#000000'> edit post</a></i>
+                    <i><a href='{{url('/multi_post/edit',['id'=>$multi_post->id])}}'style='color:#000000'>edit post</a></i>
 
                     </div>
                     <div class="card-body">{{$multi_post->content}}</div>
                     @if ($num_of_comments<1)
                     <div class="card-footer">
-                        <form method="POST" action="{{route('multi.comment.store')}}"><!--need to have logic to remove this when comment count<1 -->
+                        <i><a href='{{url('/multi_post/upvote',['id'=>$multi_post->id])}}'style='color:#000000'>Upvote?</a>
+                            : {{$multi_post->upvotes->count()}}</i>
+                        <form method="POST" action="{{route('multi.comment.store')}}">
                             @csrf
                             <p>Comment: <input type="text" name="comment" size="35"
                                 value="{{old('comment')}}"></p>
@@ -40,7 +42,10 @@
                     <div class="p-3 mb-2 bg-white text-dark">
                         @foreach ($comments as $comment)
                             @if ($comment->multi_post_id==$multi_post->id)
-                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}} {{$comment->id}}</p>
+                                <p class="tab">
+                                    {{$comment_user=$comment->user}}: {{$comment->content}}&emsp;&emsp;
+                                     <i><a href='{{url('/comment/upvote',['id'=>$comment->id])}}'style='color:#000000'>Upvote?</a>
+                                        : {{$comment->upvotes->count()}}</i> </p>
                             @endif
                         @endforeach
                     </div>

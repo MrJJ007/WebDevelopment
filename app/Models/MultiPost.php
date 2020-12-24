@@ -15,7 +15,11 @@ class MultiPost extends Model
 	public function user()
 	{
 		return $this->hasMany('App\Models\User');
-	}
+    }
+    public function upvotes()
+    {
+        return $this->morphMany(Upvote::class, 'upvoteable');
+    }
     use HasFactory;// is this needed?
     protected $casts=[
         'users'=>'array'

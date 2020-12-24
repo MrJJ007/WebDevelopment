@@ -41,16 +41,21 @@
                 <p></p>
                 <div class="card">
                     <div class="card-header">
-                        <h4>{{$multi_post->users}} - Multi Post! {{$multi_post->id}}</h4>
+                        <h4>{{$multi_post->users}} - Multi Post! </h4>
                     </div>
                     <div class="card-body"><a href='{{url('/multi_post',['id'=>$multi_post->id])}}'>{{$multi_post->content}} </a></div>
+                    <div class="card-footer"><i><a href='{{url('/multi_post/upvote',['id'=>$multi_post->id])}}'style='color:#000000'>Upvote?</a>
+                        : {{$multi_post->upvotes->count()}}</i></div>
                     <div class="list-group-item">
                         @foreach ($comments as $comment)
                             @if ($comment->multi_post_id==$multi_post->id)
-                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}}
+                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}} &emsp;&emsp;
+                                    <i><a href='{{url('/comment/upvote',['id'=>$comment->id])}}'style='color:#000000'>Upvote?</a>
+                                        : {{$comment->upvotes->count()}}
                                 @if ($comment_user == $user_name || $user->is_admin)
-                                    <i>&emsp;&emsp;&emsp;<a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'> edit comment</a></i>
+                                    &emsp;&emsp;<a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'>edit comment</a></i>
                                 @endif</p>
+
                             @endif
                         @endforeach
 
@@ -61,18 +66,22 @@
             @foreach ($posts as $post)
                 <p></p>
                 <div class="card" >
-                    <div class="card-header"><h4>{{$post_user = $post->user}} {{$post->id}}</h4>
+                    <div class="card-header"><h4>{{$post_user = $post->user}} </h4>
                         @if ($post_user == $user_name || $user->is_admin)
-                        <i><a href='{{url('/post/edit',['id'=>$post->id])}}'style='color:#000000'> edit post</a></i>
+                        <i><a href='{{url('/post/edit',['id'=>$post->id])}}'style='color:#000000'>edit post</a></i>
                         @endif
                     </div>
                     <div class="card-body"><a href='{{url('/post',['id'=>$post->id])}}'>{{$post->content}}</a></div>
+                    <div class="card-footer"><i><a href='{{url('/post/upvote',['id'=>$post->id])}}'style='color:#000000'>Upvote?</a>
+                        : {{$post->upvotes->count()}}</i></div>
                     <div class="list-group-item">
                     @foreach ($comments as $comment)
                         @if ($comment->post_id==$post->id)
-                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}} {{$comment->id}}
+                                <p class="tab">{{$comment_user=$comment->user}}: {{$comment->content}}&emsp;&emsp;
+                                    <i><a href='{{url('/comment/upvote',['id'=>$comment->id])}}'style='color:#000000'>Upvote?</a>
+                                        : {{$comment->upvotes->count()}}</i>
                                 @if ($comment_user == $user_name || $user->is_admin)
-                                    <i>&emsp;&emsp;&emsp;<a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'> edit comment</a></i>
+                                    <i>&emsp;&emsp;&emsp;<a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'>edit comment</a></i>
                                 @endif</p>
                         @endif
                     @endforeach

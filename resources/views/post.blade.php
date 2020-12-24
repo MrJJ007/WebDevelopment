@@ -15,13 +15,16 @@
                         </div>
                         </div>
                     @endif
-                    <div class="card-header">{{$post_user_name = $post->user}}
+                    <div class="card-header"><h4>{{$post_user_name = $post->user}}</h4>
                         @if ($post_user_name == $user_name || $user->is_admin)
-                        <i><a href='{{url('/post/edit',['id'=>$post->id])}}'style='color:#000000'> edit post</a></i>
+                        <i><a href='{{url('/post/edit',['id'=>$post->id])}}'style='color:#000000'>edit post</a></i>
                         @endif
                     </div>
                     <div class="card-body">{{$post->content}}</div>
+
                     <div class="card-footer">
+                        <i><a href='{{url('/post/upvote',['id'=>$post->id])}}'style='color:#000000'>Upvote?</a>
+                            : {{$post->upvotes->count()}}</i>
                         <form method="POST" action="{{route('comment.store')}}">
                             @csrf
                             <p>Comment: <input type="text" name="comment" size="35"
@@ -32,9 +35,11 @@
                     <div class="p-3 mb-2 bg-white text-dark">
                         @foreach ($comments as $comment)
                             @if ($comment->post_id==$post->id)
-                                    <p class="tab">{{$comment_user = $comment->user}}: {{$comment->content}}&emsp;&emsp;&emsp;
+                                    <p class="tab">{{$comment_user = $comment->user}}: {{$comment->content}}&emsp;&emsp;
+                                        <i><a href='{{url('/comment/upvote',['id'=>$comment->id])}}'style='color:#000000'>Upvote?</a>
+                                        : {{$comment->upvotes->count()}}&emsp;&emsp;
                                     @if ($comment_user == $user_name || $user->is_admin)
-                                    <i><a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'> edit comment</a></i>
+                                    <a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'>edit comment</a></i>
                                     @endif</p>
                             @endif
                         @endforeach

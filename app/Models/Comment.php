@@ -14,6 +14,10 @@ class Comment extends Model
 	public function user()
 	{
 		return $this->belongsTo('App\Models\User');
-	}
+    }
+    public function upvotes()
+    {
+        return $this->morphMany(Upvote::class, 'upvoteable');
+    }
     use HasFactory;//is this needed?
 }

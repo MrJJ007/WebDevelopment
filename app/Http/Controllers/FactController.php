@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fact;
-
+//this controls the calls to the cat facts api
 class FactController extends Controller
 {
     public function exampleMethod(Fact $t){
