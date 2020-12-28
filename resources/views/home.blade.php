@@ -5,6 +5,9 @@
     $user = Auth::user();
     $user_name = $user->name;
 @endphp
+<head>
+
+</head>
 <body>
 <div class="container">
     <div class="row justify-content-center">
@@ -18,7 +21,7 @@
             @endif
             <p></p>
             <div class="card">
-                <div class="card-header"><a href='{{url('/createp')}}'>Create Post</a></div>
+                <div class="card-header"><a href='{{url('/createp')}}'style='color:#0303ff'>Create Post</a></div>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -33,7 +36,7 @@
                     @endif
                 </div>
                 <div class="card-footer">
-                    <a href='{{url('/example')}}'>Cat Fact!</a>
+                    <a href='{{url('/example')}}'style='color:#0303ff'>Cat Fact!</a>
                 </div>
             </div>
 
@@ -41,9 +44,12 @@
                 <p></p>
                 <div class="card">
                     <div class="card-header">
+                        <img src="http://127.0.0.1:8000/storage/images/horse.jpg" alt="image"title="Father Ted">
+                    </div>
+                    <div class="card-header">
                         <h4>{{$multi_post->users}} - Multi Post! </h4>
                     </div>
-                    <div class="card-body"><a href='{{url('/multi_post',['id'=>$multi_post->id])}}'>{{$multi_post->content}} </a></div>
+                    <div class="card-body"><a href='{{url('/multi_post',['id'=>$multi_post->id])}}'style='color:#0303ff'>{{$multi_post->content}} </a></div>
                     <div class="card-footer"><i><a href='{{url('/multi_post/upvote',['id'=>$multi_post->id])}}'style='color:#000000'>Upvote?</a>
                         : {{$multi_post->upvotes->count()}}</i></div>
                     <div class="list-group-item">
@@ -66,12 +72,15 @@
             @foreach ($posts as $post)
                 <p></p>
                 <div class="card" >
+                    <div class="card-header">
+                        <img src="http://127.0.0.1:8000/storage/images/father.jpg" alt="image"title="FATHER!!!!">
+                    </div>
                     <div class="card-header"><h4>{{$post_user = $post->user}} </h4>
                         @if ($post_user == $user_name || $user->is_admin)
                         <i><a href='{{url('/post/edit',['id'=>$post->id])}}'style='color:#000000'>edit post</a></i>
                         @endif
                     </div>
-                    <div class="card-body"><a href='{{url('/post',['id'=>$post->id])}}'>{{$post->content}}</a></div>
+                    <div class="card-body"><a href='{{url('/post',['id'=>$post->id])}}'style='color:#0303ff'>{{$post->content}}</a></div>
                     <div class="card-footer"><i><a href='{{url('/post/upvote',['id'=>$post->id])}}'style='color:#000000'>Upvote?</a>
                         : {{$post->upvotes->count()}}</i></div>
                     <div class="list-group-item">

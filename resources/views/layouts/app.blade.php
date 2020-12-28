@@ -39,6 +39,16 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Notifications(<span id="notif_count_id" class="notif-count">0</span>)
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">Mark all as read</a>
+                                    <a class="dropdown-item" href="#">This doesn't work</a>
+                              </div>
+                          </li>
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -75,6 +85,9 @@
                 </div>
             </div>
         </nav>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         @if ($errors->any())
             <div>
                 Errors:
@@ -90,4 +103,37 @@
         </main>
     </div>
 </body>
+<footer>
+    <script type="text/javascript">
+        var notificationsWrapper   = $('.dropdown-notifications');
+        var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
+        var notificationsCountElem = notificationsToggle.find('notif_count_id');
+        var notificationsCount     = parseInt(notificationsCountElem.data('count'));
+        var notifications          = notificationsWrapper.find('ul.dropdown-menu');
+
+        if (notificationsCount <= 0) {
+            notificationsWrapper.hide();
+        }
+
+        // Enable pusher logging - don't include this in production
+        // Pusher.logToConsole = true;
+
+        var pusher = new Pusher('cc7bc6b47f432d8262f1', {
+            cluster:'eu'
+        });
+
+        // Subscribe to the channel we specified in our Laravel Event
+        var channel = pusher.subscribe('status-liked');
+
+        // Bind a function to a Event (the full Laravel class)
+        channel.bind('event', function(data) {
+            alert('event happened on status-liked channel');
+            notifications.html(newNotificationHtml + existingNotifications);
+            notificationsCount += 1;
+            notificationsCountElem.attr('data-count', notificationsCount);
+            notificationsWrapper.find('.notif-count').text(notificationsCount);
+            notificationsWrapper.show();
+        });
+        </script>
+</footer>
 </html>

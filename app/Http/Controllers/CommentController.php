@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Events\ActivityEvent;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -33,8 +35,9 @@ class CommentController extends Controller
         $a->content = $validatedData['comment'];
         $a->post_id = $post_id;
         $a->save();
+        //event(new ActivityEvent('haha',$a->user));
         session()->flash('message','Comment made');
-        return redirect()->route('email');
+        return redirect()->route('home');
     }
     public function multi_store(Request $request){
 

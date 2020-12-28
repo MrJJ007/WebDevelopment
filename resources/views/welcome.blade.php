@@ -44,7 +44,7 @@
                         @endif
                     </div>
                 </div>
-                <!-- <img src="{{asset('public/images/image.jpg')}}" alt="image"title="moss"> -->
+                <img src="http://127.0.0.1:8000/storage/images/group.png" alt="image"title="moss">
             </div>
         </div>
     </body>

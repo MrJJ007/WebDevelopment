@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\MultiPost;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,17 @@ class HomeController extends Controller
         $posts = Post::all();
         $comments = Comment::all();
         $multi_posts = MultiPost::all();
-        return  view('home',['posts'=>$posts,'comments'=>$comments,'multi_posts'=>$multi_posts]);
+        echo asset('storage/images/image.jpg');
+        //$contents = Storage::get('storage/images/image.jpg');
+        //dd($contents);
+        $filename='storage/images/image.jpg';
+        if(file_exists($filename)){
+            $filepath = asset($filename);
+        }else{
+            $filepath=null;
+        }
+        return  view('home',['posts'=>$posts,'comments'=>$comments,'multi_posts'=>$multi_posts,'image'=>$filepath]);
+
     }
 
     public function show(Post $post){

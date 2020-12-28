@@ -45,7 +45,10 @@
                                 <p class="tab">
                                     {{$comment_user=$comment->user}}: {{$comment->content}}&emsp;&emsp;
                                      <i><a href='{{url('/comment/upvote',['id'=>$comment->id])}}'style='color:#000000'>Upvote?</a>
-                                        : {{$comment->upvotes->count()}}</i> </p>
+                                        : {{$comment->upvotes->count()}}&emsp;&emsp;
+                                        @if ($comment_user == $user_name || $user->is_admin)
+                                        <a href='{{url('/comment/edit',['id'=>$comment->id])}}'style='color:#000000'>edit comment</a></i>
+                                        @endif</p>
                             @endif
                         @endforeach
                     </div>
