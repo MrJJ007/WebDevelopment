@@ -72,12 +72,14 @@
             @foreach ($posts as $post)
                 <p></p>
                 <div class="card" >
-                    <div class="card-header">
-                        <img src="http://127.0.0.1:8000/storage/images/father.jpg" alt="image"title="FATHER!!!!">
-                    </div>
                     <div class="card-header"><h4>{{$post_user = $post->user}} </h4>
                         @if ($post_user == $user_name || $user->is_admin)
                         <i><a href='{{url('/post/edit',['id'=>$post->id])}}'style='color:#000000'>edit post</a></i>
+                        @endif
+                    </div>
+                    <div class="card-header">
+                        @if($post->post_image != null)
+                            <img src="{{asset($post->post_image)}}" alt="image"title="FATHER!!!!">
                         @endif
                     </div>
                     <div class="card-body"><a href='{{url('/post',['id'=>$post->id])}}'style='color:#0303ff'>{{$post->content}}</a></div>

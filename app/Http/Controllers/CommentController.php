@@ -37,7 +37,7 @@ class CommentController extends Controller
         $a->save();
         //event(new ActivityEvent('haha',$a->user));
         session()->flash('message','Comment made');
-        return redirect()->route('home');
+        return redirect()->route('home');//put this to email if you want to replug that
     }
     public function multi_store(Request $request){
 

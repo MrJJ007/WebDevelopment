@@ -44,7 +44,7 @@
                         @endif
                     </div>
                 </div>
-                <img src="http://127.0.0.1:8000/storage/images/group.png" alt="image"title="moss">
+                <img src="http://127.0.0.1:8000/storage/images/group.png" alt="image"title="It crowd gang">
             </div>
         </div>
     </body>

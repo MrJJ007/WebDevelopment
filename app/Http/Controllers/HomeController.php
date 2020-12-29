@@ -27,7 +27,7 @@ class HomeController extends Controller
         $posts = Post::all();
         $comments = Comment::all();
         $multi_posts = MultiPost::all();
-        echo asset('storage/images/image.jpg');
+
         //$contents = Storage::get('storage/images/image.jpg');
         //dd($contents);
         $filename='storage/images/image.jpg';
@@ -36,7 +36,7 @@ class HomeController extends Controller
         }else{
             $filepath=null;
         }
-        return  view('home',['posts'=>$posts,'comments'=>$comments,'multi_posts'=>$multi_posts,'image'=>$filepath]);
+        return  view('home',['posts'=>$posts,'comments'=>$comments,'multi_posts'=>$multi_posts]);
 
     }
 

@@ -5,9 +5,10 @@ namespace App\Listeners\Illuminate\Auth\Listeners;
 use App\Events\NewMessage;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Queue\ShouldQueue;
+
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendPostActivyNotification implements ShouldQueue
+class SendPostActivityNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -16,7 +17,7 @@ class SendPostActivyNotification implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        $this->this;
     }
 
     /**
