@@ -48,9 +48,6 @@ Route::get('comment/edit/{comment}',[App\Http\Controllers\CommentController::cla
 Route::post('commentedit',[App\Http\Controllers\CommentController::class, 'edit_store'])->name('comment.edit.store');
 Route::get('comment/delete/{comment}',[App\Http\Controllers\CommentController::class, 'delete_store'])->name('comment.delete');
 
-//all about email
-Route::get('email',[App\Http\Controllers\MailController::class, 'send_new_comment_email'])->name('email');
-Route::get('notification',[App\Http\Controllers\MessageController::class, 'send'])->name('notification');
 //all about upvotes
 Route::get('post/upvote/{post}',[App\Http\Controllers\UpVoteController::class, 'post_up_vote'])->name('post.up.vote');
 Route::get('multi_post/upvote/{multi_post}',[App\Http\Controllers\UpVoteController::class, 'multi_post_up_vote'])->name('multi.post.up.vote');
