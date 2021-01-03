@@ -12,13 +12,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if (session('message'))
-                <div class="card">
-                    <div class="card-header">
-                        <p><b>{{session('message')}}</b></p>
-                    </div>
-                </div>
-            @endif
+
             <p></p>
             <div class="card">
                 <div class="card-header"><a href='{{url('/createp')}}'style='color:#0303ff'>Create Post</a></div>
@@ -39,7 +33,6 @@
                     <a href='{{url('/catFact')}}'style='color:#0303ff'>Cat Fact!</a>
                 </div>
             </div>
-
             @foreach ($multi_posts as $multi_post)
                 <p></p>
                 <div class="card">
@@ -51,7 +44,6 @@
                         : {{$multi_post->upvotes->count()}}</i></div>
                 </div>
             @endforeach
-
             @foreach ($posts as $post)
                 <p></p>
                 <div class="card">
@@ -69,8 +61,6 @@
                         : {{$post->upvotes->count()}}</i></div>
                 </div>
             @endforeach
-
-
             <p></p>
             <div>
                 <nav aria-label="Page navigation example">
@@ -79,24 +69,6 @@
                     </ul>
                   </nav>
             </div>
-            {{-- <div>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                      <li class="page-item disabled">
-                        <span class="page-link">Previous</span>
-                      </li>
-                      <li class="page-item active"><span class="page-link">
-                        1
-                        <span class="sr-only">(current)</span>
-                      </span></li>
-                      <li class="page-item"><a class="page-link" href="{{url('/home')}}">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                      </li>
-                    </ul>
-                  </nav>
-            </div> --}}
         </div>
     </div>
 </div>

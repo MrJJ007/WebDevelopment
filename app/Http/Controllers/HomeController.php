@@ -24,8 +24,6 @@ class HomeController extends Controller
      */
     private $paginate=2;
     public function index(){
-        // $posts = Post::all();
-        // $multi_posts = MultiPost::all();
         $posts = Post::orderBy('created_at','DESC')->paginate($this->paginate);
         $multi_posts = MultiPost::orderBy('created_at','DESC')->paginate($this->paginate);
         return  view('home',['posts'=>$posts,'multi_posts'=>$multi_posts]);
