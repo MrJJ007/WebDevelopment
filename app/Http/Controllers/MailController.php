@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-
+/* I implemented this because i thought it would be fun
+ * and definatley not because i failed to read the rubric correctly :P
+ */
 class MailController extends Controller
 {
     /**
@@ -17,7 +19,7 @@ class MailController extends Controller
         $this->middleware('auth');
     }
 
-    public function sendNewCommentEmail(){
+    public function send_new_comment_email(){
 
         $data = array('name'=>"gandi");
         Mail::send(['text'=>'commentMail'], $data, function($message) {

@@ -13,7 +13,7 @@ class MultiPostController extends Controller
         $comments = Comment::all();//this should probs be changed to only parse the needed comments
         return view('multiPost',['multi_post'=>$multi_post,'comments'=>$comments]);
     }
-
+    //this is for deleting multi_post
     public function multi_delete_store(){
         $multi_post_id = substr(url()->previous(),38);
         $multi_post = MultiPost::findOrFail($multi_post_id);
@@ -21,14 +21,13 @@ class MultiPostController extends Controller
         session()->flash('message','Multi Post deleted');
         return redirect()->route('home');
     }
-
+    //this for editing mulit_post
     public function multi_edit(){
         $comments = Comment::all();//this should probs be changed to only parse the needed comments
         $multi_post_id = substr(url()->previous(),33);
         $multi_post = MultiPost::findOrFail($multi_post_id);
         return view('editMultiPost',['multi_post'=>$multi_post,'comments'=>$comments]);
     }
-
     public function multi_edit_store(Request $request){
         $multi_post_id = substr(url()->previous(),38);
         $multi_post = MultiPost::findOrFail($multi_post_id);

@@ -11,8 +11,8 @@
                             @csrf
                             <p>Content: <input type="text" name="content" size="35"
                                 value="{{old('content')}}"autofocus></p>
-                                    <input type="checkbox" name="multiPost" id="multiPost" value="multiPost">
-                                        <label for="multiPost">Allow others to edit this post, and only allow one comment</label><br />
+                                    <input type="checkbox" name="multi_post" id="multi_post" value="multi_post">
+                                        <label for="multi_post">Allow others to edit this post, and only allow one comment. Also no images</label><br />
                                 <div class="form-group row">
                                         <div class="col-md-6">
                                             <input id="image" type="file" class="form-control" name="image">

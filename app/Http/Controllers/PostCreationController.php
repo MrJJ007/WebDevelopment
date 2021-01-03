@@ -17,25 +17,25 @@ class PostCreationController extends Controller
     }
 
     public function store(Request $request){
-
-        $validatedData = $request->validate([
+        $validated_data = $request->validate([
             'content'=> 'required|max:200',
             'image'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
-        if ($request->multiPost == "multiPost") {
+        //this for multiposts
+        if ($request->multi_post == "multi_post") {
             $a = new MultiPost;
             $a->user_id = Auth::user()->id;
             $a->users = Auth::user()->name;
-            $a->content = $validatedData['content'];
+            $a->content = $validated_data['content'];
             $a->save();
-            session()->flash('message','MultiPost made');
+            session()->flash('message','Multi Post made');
             return redirect()->route('home');
         }
-        //dd($request->image);
+        //this for posts with/out images
         $a = new Post;
-        $a->user_id = Auth::user()->id;// need to access user id
-        $a->user = Auth::user()->name;// need to access user name
-        $a->content = $validatedData['content'];
+        $a->user_id = Auth::user()->id;
+        $a->user = Auth::user()->name;
+        $a->content = $validated_data['content'];
         if ($request->has('image')){
             $image = $request->file('image');
             $name=Str::slug($request->input('name')).'_'.time();

@@ -44,8 +44,8 @@
                                 Notifications(<span id="notif_count_id" class="notif-count">0</span>)
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Mark all as read</a>
-                                    <a class="dropdown-item" href="#">This doesn't work</a>
+
+                                    <a class="dropdown-item" href="#">You thought I had got this working LUL</a>
                               </div>
                           </li>
 

@@ -1,12 +1,6 @@
 <?php
-
-use App\Http\Controllers\Broadcast;
-use App\Models\News;
 use App\Models\Fact;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application\Singleton;
-
 
 app()->singleton('App\Models\Fact',function($app){
     return new Fact('maxlength=140');
@@ -21,13 +15,6 @@ app()->singleton('App\Models\Fact',function($app){
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-// app()->singleton('App\Controllers\BroadcastController',function($app){
-//     $user = new User;
-//     return new Broadcast($user);
-// });
-Route::get('example', [App\Http\Controllers\FactController::class, 'exampleMethod']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -58,18 +45,19 @@ Route::post('comment',[App\Http\Controllers\CommentController::class, 'store'])-
 Route::post('multi_comment',[App\Http\Controllers\CommentController::class, 'multi_store'])->name('multi.comment.store');
 //functions about comments
 Route::get('comment/edit/{comment}',[App\Http\Controllers\CommentController::class, 'edit'])->name('comment.edit');
-Route::post('commentedit',[App\Http\Controllers\CommentController::class, 'editStore'])->name('comment.edit.store');
-Route::get('comment/delete/{comment}',[App\Http\Controllers\CommentController::class, 'deleteStore'])->name('comment.delete');
+Route::post('commentedit',[App\Http\Controllers\CommentController::class, 'edit_store'])->name('comment.edit.store');
+Route::get('comment/delete/{comment}',[App\Http\Controllers\CommentController::class, 'delete_store'])->name('comment.delete');
 
 //all about email
-Route::get('email',[App\Http\Controllers\MailController::class, 'sendNewCommentEmail'])->name('email');
+Route::get('email',[App\Http\Controllers\MailController::class, 'send_new_comment_email'])->name('email');
 Route::get('notification',[App\Http\Controllers\MessageController::class, 'send'])->name('notification');
 //all about upvotes
 Route::get('post/upvote/{post}',[App\Http\Controllers\UpVoteController::class, 'post_up_vote'])->name('post.up.vote');
 Route::get('multi_post/upvote/{multi_post}',[App\Http\Controllers\UpVoteController::class, 'multi_post_up_vote'])->name('multi.post.up.vote');
 Route::get('comment/upvote/{comment}',[App\Http\Controllers\UpVoteController::class, 'comment_up_vote'])->name('comment.up.vote');
+Route::get('comment/upvote_return/{comment}',[App\Http\Controllers\UpVoteController::class, 'comment_return_up_vote'])->name('comment.return.up.vote');
+//this is about the api
+Route::get('catFact',[App\Http\Controllers\FactController::class, 'get_fact'])->name('get.fact');
 
-Route::get('test',function(){
-    event(new App\Events\StatusLiked('Someone'));
-    return "yes";
-})->name('test');
+
+

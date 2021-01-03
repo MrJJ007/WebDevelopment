@@ -7,7 +7,12 @@ use App\Models\User;
 use App\Events\NewMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+/*
+This file is currently not used and so
+can be deleted freely.
+I have yet to delete as it may prove
+useful in the very near future 30/12/2020
+*/
 class MessageController extends Controller
 {
     public function __construct() {
