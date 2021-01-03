@@ -69,6 +69,34 @@
                         : {{$post->upvotes->count()}}</i></div>
                 </div>
             @endforeach
+
+
+            <p></p>
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {{$posts->links('')}}
+                    </ul>
+                  </nav>
+            </div>
+            {{-- <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                      </li>
+                      <li class="page-item active"><span class="page-link">
+                        1
+                        <span class="sr-only">(current)</span>
+                      </span></li>
+                      <li class="page-item"><a class="page-link" href="{{url('/home')}}">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+            </div> --}}
         </div>
     </div>
 </div>

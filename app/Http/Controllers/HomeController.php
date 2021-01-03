@@ -22,16 +22,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    private $paginate=2;
     public function index(){
-        $posts = Post::all();
-        $comments = Comment::all();
-        $multi_posts = MultiPost::all();
-        return  view('home',['posts'=>$posts,'comments'=>$comments,'multi_posts'=>$multi_posts]);
-
-    }
-
-    public function show(Post $post){
-        $comments = Comment::all();
-        return view('post',['post'=>$post,'comments'=>$comments]);
+        // $posts = Post::all();
+        // $multi_posts = MultiPost::all();
+        $posts = Post::orderBy('created_at','DESC')->paginate($this->paginate);
+        $multi_posts = MultiPost::orderBy('created_at','DESC')->paginate($this->paginate);
+        return  view('home',['posts'=>$posts,'multi_posts'=>$multi_posts]);
     }
 }
