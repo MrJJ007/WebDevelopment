@@ -8,7 +8,7 @@
 </p>
 
 ## Made By Jamie Springett - 958804
-
+This repo is for my Web Development coursework that i completed during my Computer Science degree. The stack we I was Laravel/Laravelui/Blade/Vue.js
 
 ## About Laravel
 
